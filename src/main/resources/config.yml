@@ -1,0 +1,107 @@
+# Default value for any setting (new players). Use ON / OFF / ANYONE / FRIENDS.
+# Key = setting name in lowercase. Example:
+# defaults:
+#   fast_crystals: ON
+defaults: {}
+
+# Commands (from other plugins) that are checked against the TARGET's privacy settings.
+# The first argument must be the target player's name.
+guarded-commands:
+  private-message: [msg, tell, w, whisper, m, pm, t]
+  teleport-request: [tpa, tpask, call, etpa]
+  teleport-here-request: [tpahere, etpahere, tpaskhere]
+  payment: [pay, epay, shards pay]   # "label subcommand" entries: the player is the word after it
+
+combat:
+  duration-seconds: 15
+
+general:
+  task-interval-ticks: 100   # how often Night Vision / mob / phantom spawning runs
+
+mob-spawns:
+  per-cycle: 2
+  max-nearby: 8
+  min-distance: 10
+  max-distance: 24
+  types: [ZOMBIE, SKELETON, SPIDER, CREEPER]
+
+phantom-spawns:
+  per-cycle: 1
+  max-nearby: 3
+
+# Commands run (as the player) whenever they change these settings in the menu
+commands:
+  quick-buy: "ah fastbuy"
+  quick-sell: "ah fastsell"
+
+# ---------------------------------------------------------------------------
+# Alerts: chat / action-bar messages from your other plugins are recognised by their text
+# (case-insensitive regex, small-caps are converted to normal letters first) and hidden for players
+# who turned the matching alert OFF in /settings. First matching group wins (pay is checked first).
+# ---------------------------------------------------------------------------
+# Set to true to print every chat/action-bar message (as the filter sees it) to the console,
+# so you can copy the exact text of a plugin's message into the patterns below.
+alerts-debug: false
+
+alerts:
+  pay:
+    - 'received\b.*\bfrom\b'            # Essentials /pay, QuickShop "/shards pay"
+    - 'has been received from'
+  teleport:
+    - 'wants you to teleport to them'    # JalebiTPA incoming /tpahere
+    - 'wants to teleport to you'         # JalebiTPA incoming /tpa
+    - '\[\s*accept\s*\].*\[\s*deny\s*\]' # JalebiTPA accept / deny buttons line
+    - 'accepted your request'
+    - 'denied your request'
+    - 'has requested (to teleport to you|that you teleport to them)'   # EssentialsX
+    - 'to teleport, type /tpaccept'
+  bounty:
+    - 'claimed the .* bounty on'
+    - 'to the bounty on'
+  order:
+    - '\byour order\b'                   # "Your order for X was filled by Y" / filled while you were away
+  auction:
+    - 'returned your unsold item'
+    - 'your (auction|listing|item)s?\b.*\b(sold|expired)'
+  shard:
+    - '\+\s*[\d,]+\s*shards?\b'          # "+10 shards" after a kill
+    - 'awarded .*shards?'                # playtime reward
+
+# ---------------------------------------------------------------------------
+# Menu icons shown in front of names in /settings: small item pictures (needs 1.21.9+ client and server).
+# Each value is just an item texture name (oak_sign, bell, diamond_sword ...). Leave "" for no icon.
+# The tag built is  <sprite:ATLAS:PREFIX+name>  e.g. <sprite:items:item/oak_sign>
+# If icons don't show, change atlas / path-prefix below (try atlas "blocks"), then /settings reload-free: just reopen the menu.
+# ---------------------------------------------------------------------------
+icons:
+  atlas: "items"
+  path-prefix: "item/"
+  categories:
+    chat: "oak_sign"
+    notifications: "bell"
+    pvp: "diamond_sword"
+    visuals: "blaze_rod"
+    privacy: "iron_door"
+    general: "paper"
+  settings:
+    public_chat: "writable_book"
+    private_messages: "paper"
+    server_chat_messages: "book"
+    server_hotbar_messages: "name_tag"
+    advancement_messages: "knowledge_book"
+    pay_alerts: "gold_ingot"
+    teleport_alerts: "ender_pearl"
+    auction_alerts: "emerald"
+    shard_reward_alerts: "amethyst_shard"
+    fast_crystals: "end_crystal"
+    totem_particles: "totem_of_undying"
+    explosion_particles: "gunpowder"
+    item_worth_lore: "gold_nugget"
+    teleport_confirm_menu: "ender_eye"
+    teleport_requests: "compass"
+    allow_payments: "gold_ingot"
+    randomised_coords: "spyglass"
+    auction_quick_buy: "emerald"
+    auction_quick_sell: "gold_ingot"
+    phantom_spawning: "phantom_membrane"
+    night_vision: "golden_carrot"
